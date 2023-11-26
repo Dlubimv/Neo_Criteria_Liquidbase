@@ -1,0 +1,31 @@
+
+      version: '3.8'
+      services:
+        postgres:
+          build:
+            context: services/postgres
+            dockerfile: Dockerfile
+          ports:
+            - "5433:5432"
+          environment:
+            - POSTGRES_USER=neoflex
+            - POSTGRES_DB=neoflex-criteria-liquidbase
+            - POSTGRES_PASSWORD=admin
+          volumes:
+            - "db-data:/var/lib/postgresql/data"
+
+        app:
+          build:
+            context: services/app
+            dockerfile: Dockerfile
+          environment:
+            - PORT=1006
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/neoflex-criteria-liquidbase
+          image: 'neoflex-criteria'
+          ports:
+            - 1006:1006
+          depends_on:
+            - postgres
+
+      volumes:
+        db-data:

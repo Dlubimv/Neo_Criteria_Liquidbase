@@ -1,0 +1,75 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: dliubimov
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastname
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(30)
+  - changeSet:
+      id: 2
+      author: dliubimov
+      comment: "Create users"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "dliubimov@neoflex.ru"
+              - column:
+                  name: lastname
+                  value: "Liubimov"
+              - column:
+                  name: name
+                  value: "Danil"
+  - changeSet:
+      id: 3
+      author: dliubimov
+      comment: "Add 2 users"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "kliubimova@gmail.com"
+              - column:
+                  name: lastname
+                  value: "Liubimova"
+              - column:
+                  name: name
+                  value: "Xenia"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "Lampotos86@rambler.ru"
+              - column:
+                  name: lastname
+                  value: "Liubimov"
+              - column:
+                  name: name
+                  value: "Sergey"
